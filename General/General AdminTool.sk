@@ -20,37 +20,6 @@ on inventory click:
 		else if clicked slot is 18:
 			openGameTool(player, "Kit")
 		close player's inventory
-	else if inventory name of event-inventory is "§aKit PvP's Option":
-		cancel event
-		if clicked slot is 3:
-			make player execute command "/joinset 4 Kit"
-		else if clicked slot is 5:
-			make player execute command "/gamestart Kit"
-		else if clicked slot is 20:
-			execute console command "/randomizecustom rule GoK"
-		else if clicked slot is 21:
-			execute console command "/randomizecustom rule BEC"
-		else if clicked slot is 22:
-			execute console command "/randomizecustom rule EmJ"
-		else if clicked slot is 23:
-			execute console command "/randomizecustom rule StW"
-		else if clicked slot is 24:
-			execute console command "/randomizecustom rule CPA"
-		else if clicked slot is 26:
-			execute console command "/randomizecustom rule"
-		else if clicked slot is 30:
-			execute console command "/randomizecustom team 2"
-		else if clicked slot is 32:
-			execute console command "/randomizecustom team 4"
-		else if clicked slot is 35:
-			execute console command "/randomizecustom team"
-		else if clicked slot is 38:
-			execute console command "/togglestagevote"
-		else if clicked slot is 40:
-			execute console command "/togglestagelisting"
-		else if clicked slot is 42:
-			execute console command "/togglestagetutorial"
-		close player's inventory
 
 function openAdminTool(player: player):
 	wait 5 ticks
@@ -64,7 +33,6 @@ function openAdminTool(player: player):
 	loop 9 times:
 		set slot {_slot} of {_player}'s current inventory to white glass pane named ""
 		add 1 to {_slot}
-	set slot 18 of {_player}'s current inventory to diamond sword named "§a§lKit §6Options"
 
 function openGameTool(player: player, game: text):
 	if {_game} is "Kit":
@@ -94,52 +62,3 @@ function openGameTool(player: player, game: text):
 		set slot 38 of {_player}'s current inventory to bottle o' enchanting named "§eMap Vote" with lore "§8Current§7: §6%{Kit-StageVote}%"
 		set slot 40 of {_player}'s current inventory to paper named "§eMap Listing" with lore "§8Current§7: §6%{Kit-StageListing}%"
 		set slot 42 of {_player}'s current inventory to emerald named "§eMap Tutorial" with lore "§8Current§7: §6%{Kit-Tutorial}%"
-
-command /randomizecustom <text> <text="none">:
-	permission: sk.admin
-	trigger:
-		if arg 2 is "none":
-			delete {Kit-StageRandomize.%arg 1%}
-			broadcast "§e[§aKit PvP§e] §6%arg 1%§bの指定を取り除きました"
-		else:
-			set {_arg} to arg 2
-			if arg 1 is "team":
-				set {_arg} to {_arg} parsed as number
-			set {Kit-StageRandomize.%arg 1%} to {_arg}
-			broadcast "§e[§aKit PvP§e] §6%arg 1%§bを §c%arg 2% §bに指定しました"
-
-command /togglestagevote:
-	permission: sk.admin
-	trigger:
-		if {Kit-StageVote} is not set:
-			set {Kit-StageVote} to false
-		if {Kit-StageVote} is false:
-			set {Kit-StageVote} to true
-			broadcast "§e[§aKit PvP§e] §6Map Vote§bを§a§lON§bに設定しました"
-		else if {Kit-StageVote} is true:
-			set {Kit-StageVote} to false
-			broadcast "§e[§aKit PvP§e] §6Map Vote§bを§c§lOFF§bに設定しました"
-
-command /togglestagelisting:
-	permission: sk.admin
-	trigger:
-		if {Kit-StageListing} is not set:
-			set {Kit-StageListing} to false
-		if {Kit-StageListing} is false:
-			set {Kit-StageListing} to true
-			broadcast "§e[§aKit PvP§e] §6Map Listing§bを§a§lON§bに設定しました"
-		else if {Kit-StageListing} is true:
-			set {Kit-StageListing} to false
-			broadcast "§e[§aKit PvP§e] §6Map Listing§bを§c§lOFF§bに設定しました"
-
-command /togglestagetutorial:
-	permission: sk.admin
-	trigger:
-		if {Kit-Tutorial} is not set:
-			set {Kit-Tutorial} to false
-		if {Kit-Tutorial} is false:
-			set {Kit-Tutorial} to true
-			broadcast "§e[§aKit PvP§e] §6Map Tutorial§bを§a§lON§bに設定しました"
-		else if {Kit-Tutorial} is true:
-			set {Kit-Tutorial} to false
-			broadcast "§e[§aKit PvP§e] §6Map Tutorial§bを§c§lOFF§bに設定しました"
